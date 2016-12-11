@@ -6,9 +6,8 @@ import (
     "encoding/json"
     "io/ioutil"
     "log"
-	"fmt"
+    "flag"
 )
-
 
 type ConfProxy struct{
     Server string `json:"server"`
@@ -24,11 +23,20 @@ type PortPassword map[string]string
 
 
 func main() {
-    conf, err := LoadConf("/Users/memee/Downloads/svn/git/go/conf.json")
+
+    confPath := flag.String("c","","config file path")
+
+    flag.Parse()
+
+    if *confPath == "" {
+        log.Fatal("please input config file path.")
+    }
+
+    conf, err := LoadConf(*confPath)
+
     if err != err {
         log.Fatal("conf error")
     }
-    fmt.Println(conf)
 }
 
 func LoadConf(p string) (*ConfProxy, error){
