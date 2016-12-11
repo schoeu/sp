@@ -5,7 +5,7 @@ import (
     "io/ioutil"
 )
 
-type Proxy struct{
+type ConfProxy struct{
     Server string `json:"server"`
     LocalAddress string `json:"local_address"`
     LocalPort string `json:"local_port"`
@@ -17,15 +17,15 @@ type Proxy struct{
 
 type PortPassword map[string]string
 
-func loadConf(p string) (*Proxy, error){
+func loadConf(p string) (*ConfProxy, error){
     content, err := ioutil.ReadFile(p)
     if err != nil {
         return nil, err
     }
-    p := &Proxy{}
-    jsonErr := json.Unmarshal(content, p)
+    cp := &ConfProxy{}
+    jsonErr := json.Unmarshal(content, cp)
     if jsonErr != nil {
         return nil, err 
     }
-    return p, nil
+    return cp, nil
 }
