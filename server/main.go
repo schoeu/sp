@@ -13,7 +13,7 @@ import (
 type ConfProxy struct{
     Server string `json:"server"`
     LocalAddress string `json:"local_address"`
-    LocalPort string `json:"local_port"`
+    LocalPort int `json:"local_port"`
     PortPassword PortPassword `json:"port_password"`
     Timeout int `json:"timeout"`
     Method string `json:"method"`
@@ -24,7 +24,7 @@ type PortPassword map[string]string
 
 
 func main() {
-    conf, err := conf.LoadConf("../../conf.json")
+    conf, err := LoadConf("/Users/memee/Downloads/svn/git/go/conf.json")
     if err != err {
         log.Fatal("conf error")
     }
